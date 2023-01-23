@@ -1,23 +1,25 @@
 import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import { ROUTES } from "../utils/static";
+import { AUTH_ROUTES, NAVIGATION_ROUTES, ROUTES } from "../utils/static";
 
-type IProps = {
-  routeProtection: boolean;
-};
-
-const useAuthGuard = ({ routeProtection }: IProps) => {
+const useAuthGuard = () => {
   const { user } = useContext(UserContext);
+  const location = useLocation();
+  const perms =
+    NAVIGATION_ROUTES.find((route) => route.path === location.pathname) ||
+    AUTH_ROUTES.find((route) => route.path === location.pathname);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user && routeProtection) {
-      navigate(ROUTES.MAIN);
+    console.log(perms);
+    if (!perms) return;
+    if (!user && perms?.perms.requiredAuth) {
+      navigate(ROUTES.SINGIN);
       return;
     }
-    if (user && !routeProtection) {
-      navigate(ROUTES.MOVIES);
+    if (user && perms?.perms.guestOnly === true) {
+      navigate(-1);
     }
   });
 };

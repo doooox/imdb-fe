@@ -20,12 +20,13 @@ import { Alert } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import useAuthGuard from "../../hooks/useAuthGuard";
 import { LoadingContext } from "../../context/LoadingContext";
+import { AxiosError } from "axios";
+import { IError } from "../../types/error.types";
+import useErrors from "../../hooks/useErrors";
 
 const SignInPage = () => {
-  useAuthGuard({ routeProtection: false });
-
-  const [error, setError] = useState<string | undefined>(undefined);
-
+  useAuthGuard();
+  const { getFormatedErrors, setError } = useErrors();
   const {
     register,
     handleSubmit,
@@ -37,8 +38,8 @@ const SignInPage = () => {
     onSuccess: (data) => {
       login(data);
     },
-    onError: (message) => {
-      setError(message);
+    onError: (error: AxiosError<IError>) => {
+      setError(error);
     },
   });
 
@@ -129,13 +130,7 @@ const SignInPage = () => {
           >
             Sign In
           </Button>
-          {error && (
-            <Stack sx={{ width: "100%" }} spacing={2}>
-              <Alert variant="filled" severity="error">
-                {error.response.data?.message}
-              </Alert>
-            </Stack>
-          )}
+          {getFormatedErrors()}
           <Grid container>
             <Grid item>
               <Link href={ROUTES.SINGUP} variant="body2">

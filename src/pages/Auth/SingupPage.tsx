@@ -15,11 +15,12 @@ import { useMutation } from "@tanstack/react-query";
 import { authService } from "../../services/Auth/AuthService";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
-import useAuthGuard from "../../hooks/useAuthGuard";
 import { LoadingContext } from "../../context/LoadingContext";
+import useAuthGuard from "../../hooks/useAuthGuard";
 
 const SignUpPage = () => {
-  useAuthGuard({ routeProtection: false });
+  useAuthGuard();
+
   const {
     register,
     handleSubmit,

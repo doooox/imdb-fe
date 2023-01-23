@@ -4,18 +4,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-// import { DEFAULT_QUERY_OPTIONS } from "./utils/static";
-
-const DEFAULT_QUERY_OPTIONS = {
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      refetchIntervalInBackground: false,
-      refetchOnReconnect: true,
-      refetchOnMount: true,
-    },
-  },
-};
+import { DEFAULT_QUERY_OPTIONS } from "./utils/static";
 
 const theme = createTheme({});
 

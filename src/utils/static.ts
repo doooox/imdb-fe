@@ -11,14 +11,6 @@ export const ROUTES = {
 
 export const NAVIGATION_ROUTES: IRoute[] = [
     {
-        name: "Movies",
-        path: ROUTES.MOVIES,
-        perms: {
-            requiredAuth: true,
-            guestOnly: false
-        }
-    },
-    {
         name: "Singin",
         path: ROUTES.SINGIN,
         perms: {
@@ -72,3 +64,14 @@ export const ENDPOINTS = {
 }
 
 export type StorageKeys = "user"
+
+export const DEFAULT_QUERY_OPTIONS = {
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false,
+            refetchIntervalInBackground: false,
+            refetchOnReconnect: true,
+            refetchOnMount: true,
+        },
+    },
+};

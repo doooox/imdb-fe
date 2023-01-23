@@ -1,9 +1,9 @@
 export interface IRoute {
     name: string,
     path: string,
-    perms: IPerams
+    perms: IPerms
 }
-export interface IPerams {
+export interface IPerms {
     requiredAuth: boolean,
     guestOnly: boolean
 }
