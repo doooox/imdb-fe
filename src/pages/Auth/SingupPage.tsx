@@ -17,10 +17,13 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 import { LoadingContext } from "../../context/LoadingContext";
 import useAuthGuard from "../../hooks/useAuthGuard";
+import { IError } from "../../types/error.types";
+import useErrors from "../../hooks/useErrors";
+import { AxiosError } from "axios";
 
 const SignUpPage = () => {
   useAuthGuard();
-
+  const { getFormatedErrors, setError } = useErrors();
   const {
     register,
     handleSubmit,
@@ -29,25 +32,23 @@ const SignUpPage = () => {
   } = useForm<ISingup>();
 
   const { login } = useContext(UserContext);
-  const { mutate: singup, isLoading } = useMutation(authService.singup, {
+  const { mutate: singup } = useMutation(authService.singup, {
     onSuccess: (data) => {
-      console.log(data);
+      setLoading(false);
       login(data);
     },
-    onError: (message: string) => {
-      console.log(message);
+    onError: (error: AxiosError<IError>) => {
+      setLoading(false);
+      setError(error);
     },
   });
 
   const onSubmit: SubmitHandler<ISingup> = (data) => {
+    setLoading(true);
     singup(data);
   };
 
   const { setLoading } = useContext(LoadingContext);
-
-  useEffect(() => {
-    setLoading(isLoading);
-  }, [isLoading, setLoading]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -162,6 +163,7 @@ const SignUpPage = () => {
           >
             Sign Up
           </Button>
+          {getFormatedErrors()}
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link href={ROUTES.SINGIN} variant="body2">

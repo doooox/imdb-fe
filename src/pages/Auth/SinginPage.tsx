@@ -34,24 +34,23 @@ const SignInPage = () => {
   } = useForm<ISingin>();
 
   const { login } = useContext(UserContext);
-  const { mutate: singin, isLoading } = useMutation(authService.singin, {
+  const { mutate: singin } = useMutation(authService.singin, {
     onSuccess: (data) => {
+      setLoading(false);
       login(data);
     },
     onError: (error: AxiosError<IError>) => {
+      setLoading(false);
       setError(error);
     },
   });
 
   const onSubmit: SubmitHandler<ISingin> = (data) => {
+    setLoading(true);
     singin(data);
   };
 
   const { setLoading } = useContext(LoadingContext);
-
-  useEffect(() => {
-    setLoading(isLoading);
-  }, [isLoading, setLoading]);
 
   return (
     <Container component="main" maxWidth="xs">

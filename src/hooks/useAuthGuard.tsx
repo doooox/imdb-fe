@@ -12,7 +12,6 @@ const useAuthGuard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(perms);
     if (!perms) return;
     if (!user && perms?.perms.requiredAuth) {
       navigate(ROUTES.SINGIN);
