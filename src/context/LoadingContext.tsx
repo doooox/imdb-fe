@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createContext } from "react";
 
 interface ILoadingContext {
@@ -7,5 +8,5 @@ interface ILoadingContext {
 
 export const LoadingContext = createContext<ILoadingContext>({
   loading: false,
-  setLoading: (state: boolean) => Function,
+  setLoading: (_state: boolean) => Function,
 });

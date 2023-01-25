@@ -3,9 +3,6 @@ interface Error {
     param: string;
     loaction: string;
 }
-interface Data {
+export interface IError {
     errors: Error[]
-}
-export interface IError extends Data {
-
 }
