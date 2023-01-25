@@ -13,7 +13,7 @@ import ISingup from "../../types/singup.types";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { authService } from "../../services/Auth/AuthService";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import { LoadingContext } from "../../context/LoadingContext";
 import useAuthGuard from "../../hooks/useAuthGuard";

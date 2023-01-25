@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { Link, Outlet } from "react-router-dom";
-import { AUTH_ROUTES, NAVIGATION_ROUTES, SITE } from "../utils/static";
+import { AUTH_ROUTES, NAVIGATION_ROUTES, ROUTES, SITE } from "../utils/static";
 import { useContext } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
@@ -45,7 +45,7 @@ const Navigation = () => {
   return (
     <>
       <AppBar
-        position="static"
+        position="absolute"
         style={{
           background:
             "linear-gradient(16deg, rgba(37,37,37,1) 44%, rgba(92,91,91,1) 78%)",
@@ -61,13 +61,13 @@ const Navigation = () => {
               variant="h6"
               noWrap
               component="a"
-              href="/"
+              href={ROUTES.MOVIES}
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
                 fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
+                fontWeight: 900,
+                letterSpacing: ".2rem",
                 color: "inherit",
                 textDecoration: "none",
               }}
@@ -136,7 +136,7 @@ const Navigation = () => {
               variant="h5"
               noWrap
               component="a"
-              href=""
+              href={ROUTES.MOVIES}
               sx={{
                 mr: 2,
                 display: { xs: "flex", md: "none" },
@@ -190,7 +190,7 @@ const Navigation = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      <Container maxWidth="xl" style={{ marginTop: "2rem" }}>
+      <Container maxWidth="xl" style={{ marginTop: "8rem" }}>
         <Outlet />
       </Container>
     </>
