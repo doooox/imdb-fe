@@ -8,7 +8,7 @@ function useErrors() {
 
   const getFormatedErrors = () => {
     return error?.response?.data.errors.map((error) => (
-      <Stack sx={{ width: "100%" }} spacing={2}>
+      <Stack sx={{ width: "100%" }} spacing={2} key={error.msg}>
         <Alert variant="filled" severity="error">
           {error.msg}
         </Alert>

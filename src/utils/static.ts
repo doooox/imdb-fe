@@ -5,6 +5,7 @@ export const ROUTES = {
     SINGIN: "/singin",
     SINGUP: "/singup",
     MOVIES: "/movies",
+    SINGLEMOVIE: "/movies/:id",
     SINGOUT: "/singout"
 }
 
@@ -60,7 +61,9 @@ export const SITE: IRoute =
 export const ENDPOINTS = {
     SINGIN: "/auth/singin",
     SINGUP: "/auth/singup",
-    SINGOUT: "/auth/singout"
+    SINGOUT: "/auth/singout",
+    MOVIES: "/movies",
+    SINGLEMOVIE: "/movies/:id",
 }
 
 export type StorageKeys = "user"

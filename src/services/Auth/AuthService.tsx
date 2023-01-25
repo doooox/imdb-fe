@@ -3,8 +3,6 @@ import { IUser } from "../../types/user.types";
 import ISingup from "../../types/singup.types";
 import { ENDPOINTS } from "../../utils/static";
 import ISingin from "../../types/singin.types";
-import { AxiosError } from "axios";
-import { IError } from "../../types/error.types";
 
 class AuthService {
   private httpService = httpService;

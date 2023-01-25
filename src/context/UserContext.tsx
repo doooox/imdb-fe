@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createContext } from "react";
 import { IUser } from "../types/user.types";
 
@@ -10,7 +11,7 @@ interface IUserContext {
 
 export const UserContext = createContext<IUserContext>({
   user: null,
-  setUser: (user: IUser) => Function,
-  login: (user: IUser) => Function,
+  setUser: (_user: IUser) => Function,
+  login: (_user: IUser) => Function,
   logout: () => Function,
 });
