@@ -27,7 +27,7 @@ const MoviseComponent = ({ movie }: Props) => {
             {movie.title}
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
-            {movie.genre.map((gen) => (
+            {movie.genres.map((gen) => (
               <small
                 style={{ fontSize: "0.7rem", margin: "0.2rem" }}
                 key={gen._id}

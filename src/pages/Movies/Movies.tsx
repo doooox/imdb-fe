@@ -7,12 +7,12 @@ import { Container } from "@mui/system";
 import { useContext, useEffect } from "react";
 import { LoadingContext } from "../../context/LoadingContext";
 import { useGetMoviesQuery } from "../../queries/movie.query";
-import useErrors from "../../hooks/useErrors";
+import useErrors from "../../hooks/useInfoMessages";
 import MoviseComponent from "../../components/MoviseComponent";
 
 const Movies = () => {
   useAuthGuard();
-  const { getFormatedErrors, setError } = useErrors();
+  const { getFormatedMessages, setError } = useErrors();
   const { setLoading } = useContext(LoadingContext);
 
   const { data: movies, isLoading, error } = useGetMoviesQuery();
@@ -44,7 +44,7 @@ const Movies = () => {
         style={{ marginBottom: "2rem" }}
       >
         MOVIE LIST
-        {getFormatedErrors()}
+        {getFormatedMessages()}
       </Typography>
       <Box sx={{ flexGrow: 1 }}>
         <Grid

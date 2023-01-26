@@ -6,4 +6,5 @@ export interface IRoute {
 export interface IPerms {
     requiredAuth: boolean,
     guestOnly: boolean
+    adminOnly: boolean
 }

@@ -18,12 +18,12 @@ import { UserContext } from "../../context/UserContext";
 import { LoadingContext } from "../../context/LoadingContext";
 import useAuthGuard from "../../hooks/useAuthGuard";
 import { IError } from "../../types/error.types";
-import useErrors from "../../hooks/useErrors";
+import useErrors from "../../hooks/useInfoMessages";
 import { AxiosError } from "axios";
 
 const SignUpPage = () => {
   useAuthGuard();
-  const { getFormatedErrors, setError } = useErrors();
+  const { getFormatedMessages, setError } = useErrors();
   const {
     register,
     handleSubmit,
@@ -163,7 +163,7 @@ const SignUpPage = () => {
           >
             Sign Up
           </Button>
-          {getFormatedErrors()}
+          {getFormatedMessages()}
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link href={ROUTES.SINGIN} variant="body2">
