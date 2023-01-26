@@ -21,11 +21,11 @@ import useAuthGuard from "../../hooks/useAuthGuard";
 import { LoadingContext } from "../../context/LoadingContext";
 import { AxiosError } from "axios";
 import { IError } from "../../types/error.types";
-import useErrors from "../../hooks/useErrors";
+import useErrors from "../../hooks/useInfoMessages";
 
 const SignInPage = () => {
   useAuthGuard();
-  const { getFormatedErrors, setError } = useErrors();
+  const { getFormatedMessages, setError } = useErrors();
   const {
     register,
     handleSubmit,
@@ -128,7 +128,7 @@ const SignInPage = () => {
           >
             Sign In
           </Button>
-          {getFormatedErrors()}
+          {getFormatedMessages()}
           <Grid container>
             <Grid item>
               <Link href={ROUTES.SINGUP} variant="body2">

@@ -6,7 +6,8 @@ export const ROUTES = {
     SINGUP: "/singup",
     MOVIES: "/movies",
     SINGLEMOVIE: "/movies/:id",
-    SINGOUT: "/singout"
+    SINGOUT: "/singout",
+    CREATEMOVE: "/create"
 }
 
 
@@ -16,7 +17,8 @@ export const NAVIGATION_ROUTES: IRoute[] = [
         path: ROUTES.SINGIN,
         perms: {
             requiredAuth: false,
-            guestOnly: true
+            guestOnly: true,
+            adminOnly: false
         }
     },
     {
@@ -24,18 +26,8 @@ export const NAVIGATION_ROUTES: IRoute[] = [
         path: ROUTES.SINGUP,
         perms: {
             requiredAuth: false,
-            guestOnly: true
-        }
-    },
-]
-
-export const AUTH_ROUTES: IRoute[] = [
-    {
-        name: "Movies",
-        path: ROUTES.MOVIES,
-        perms: {
-            requiredAuth: true,
-            guestOnly: false
+            guestOnly: true,
+            adminOnly: false
         }
     },
     {
@@ -43,7 +35,26 @@ export const AUTH_ROUTES: IRoute[] = [
         path: ROUTES.SINGOUT,
         perms: {
             requiredAuth: true,
-            guestOnly: false
+            guestOnly: false,
+            adminOnly: false
+        }
+    },
+    {
+        name: "Movies",
+        path: ROUTES.MOVIES,
+        perms: {
+            requiredAuth: true,
+            guestOnly: false,
+            adminOnly: false
+        }
+    },
+    {
+        name: "Create Movie",
+        path: ROUTES.CREATEMOVE,
+        perms: {
+            requiredAuth: true,
+            guestOnly: false,
+            adminOnly: true
         }
     },
 ]
@@ -54,7 +65,8 @@ export const SITE: IRoute =
     path: "/",
     perms: {
         requiredAuth: false,
-        guestOnly: true
+        guestOnly: true,
+        adminOnly: false
     }
 }
 
@@ -63,7 +75,8 @@ export const ENDPOINTS = {
     SINGUP: "/auth/singup",
     SINGOUT: "/auth/singout",
     MOVIES: "/movies",
-    SINGLEMOVIE: "/movies/:id",
+    GENRES: "/genres",
+    CREATEMOVIE: "/movies/create",
 }
 
 export type StorageKeys = "user"

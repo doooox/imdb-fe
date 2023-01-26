@@ -1,6 +1,6 @@
 import { httpService } from "../HttpService";
 import { ENDPOINTS } from "../../utils/static";
-import { IMovie } from "../../types/movie.types";
+import { IMovie, IMovieDraft } from "../../types/movie.types";
 
 class MovieService {
   private httpService = httpService;
@@ -11,5 +11,14 @@ class MovieService {
       method: "GET",
     });
   };
+
+  createMovie = async (data: IMovieDraft) => {
+    return await this.httpService.request<IMovieDraft>({
+      url: ENDPOINTS.CREATEMOVIE,
+      method: "POST",
+      data,
+    });
+  };
+
 }
 export const movieService = new MovieService();

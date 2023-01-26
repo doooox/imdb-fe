@@ -9,17 +9,14 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { Link, Outlet } from "react-router-dom";
-import { AUTH_ROUTES, NAVIGATION_ROUTES, ROUTES, SITE } from "../utils/static";
+import { NAVIGATION_ROUTES, ROUTES, SITE } from "../utils/static";
 import { useContext } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
 import { Search, SearchIconWrapper, StyledInputBase } from "./SearchComponent";
 import { UserContext } from "../context/UserContext";
-import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
-  const navigate = useNavigate();
-
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -32,14 +29,18 @@ const Navigation = () => {
     setAnchorElNav(null);
   };
 
-  const { logout, user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
-  const authRoutes = (route: string) => {
-    if (route === "/singout") {
-      logout();
-      return;
-    }
-    navigate(route);
+  const getAvailbleRoutes = () => {
+    const routes = NAVIGATION_ROUTES.map((route) => {
+      if (!user && route.perms.guestOnly) return route;
+      if (user) {
+        if (route.perms.requiredAuth && !route.perms.adminOnly) return route;
+        if (user.isAdmin && route.perms.adminOnly) return route;
+      }
+    }).filter((route) => route);
+    console.log(routes);
+    return routes;
   };
 
   return (
@@ -103,32 +104,22 @@ const Navigation = () => {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {!user &&
-                  NAVIGATION_ROUTES.map((page) => (
-                    <Button
-                      key={page.name}
-                      sx={{ my: 2, color: "white", display: "block" }}
-                    >
-                      <Link
-                        to={page.path}
-                        style={{ textDecoration: "none", color: "black" }}
-                      >
-                        {page.name}
-                      </Link>
-                    </Button>
-                  ))}
-                <Button>
-                  {user &&
-                    AUTH_ROUTES.map((page) => (
+                {getAvailbleRoutes()?.map(
+                  (page) =>
+                    page && (
                       <Button
                         key={page.name}
                         sx={{ my: 2, color: "white", display: "block" }}
-                        onClick={() => authRoutes(page.path)}
                       >
-                        <Typography textAlign="center">{page.name}</Typography>
+                        <Link
+                          to={page.path}
+                          style={{ textDecoration: "none", color: "black" }}
+                        >
+                          {page.name}
+                        </Link>
                       </Button>
-                    ))}
-                </Button>
+                    )
+                )}
               </Menu>
             </Box>
 
@@ -151,32 +142,19 @@ const Navigation = () => {
               {SITE.name}
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {!user &&
-                NAVIGATION_ROUTES.map((page) => (
-                  <Button
-                    key={page.name}
-                    sx={{ my: 2, color: "white", display: "block" }}
-                  >
-                    <Link
-                      to={page.path}
-                      style={{ textDecoration: "none", color: "white" }}
-                    >
-                      {page.name}
-                    </Link>
-                  </Button>
-                ))}
-              <Button>
-                {user &&
-                  AUTH_ROUTES.map((page) => (
-                    <Button
-                      key={page.name}
-                      sx={{ my: 2, color: "white", display: "block" }}
-                      onClick={() => authRoutes(page.path)}
-                    >
-                      <Typography textAlign="center">{page.name}</Typography>
+              {getAvailbleRoutes()?.map(
+                (page) =>
+                  page && (
+                    <Button key={page.name} sx={{ my: 2, display: "block" }}>
+                      <Link
+                        to={page.path}
+                        style={{ textDecoration: "none", color: "white" }}
+                      >
+                        {page.name}
+                      </Link>
                     </Button>
-                  ))}
-              </Button>
+                  )
+              )}
             </Box>
             <Search>
               <SearchIconWrapper>
