@@ -2,7 +2,7 @@ export interface IMovieDraft {
     title: string,
     description: string,
     coverImage: string,
-    genre: IGenre[]
+    genres: IGenre[]
 }
 
 export interface IMovie extends IMovieDraft {

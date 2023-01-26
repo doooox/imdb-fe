@@ -39,7 +39,6 @@ const Navigation = () => {
         if (user.isAdmin && route.perms.adminOnly) return route;
       }
     }).filter((route) => route);
-    console.log(routes);
     return routes;
   };
 

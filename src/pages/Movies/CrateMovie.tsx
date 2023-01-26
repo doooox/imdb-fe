@@ -42,13 +42,13 @@ const MenuProps = {
 
 const CreateMovie = () => {
   useAuthGuard();
-  const [genreName, setGemreMame] = useState<string[]>([]);
+  const [genresName, setGenresName] = useState<string[]>([]);
 
-  const handleChange = (event: SelectChangeEvent<typeof genreName>) => {
+  const handleChange = (event: SelectChangeEvent<typeof genresName>) => {
     const {
       target: { value },
     } = event;
-    setGemreMame(
+    setGenresName(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
@@ -81,7 +81,7 @@ const CreateMovie = () => {
       title: data.title,
       description: data.description,
       coverImage: data.coverImage,
-      genre: data.genre.map((genre) => {
+      genres: data.genres.map((genre) => {
         return {
           _id: genre._id,
         };
@@ -178,11 +178,11 @@ const CreateMovie = () => {
             <Grid item xs={12}>
               <InputLabel>Genres</InputLabel>
               <Select
-                {...register("genre", {
+                {...register("genres", {
                   required: "Movie genres are requiered",
                 })}
                 multiple
-                value={genreName}
+                value={genresName}
                 onChange={handleChange}
                 input={<OutlinedInput label="Genres" />}
                 renderValue={(selected) => (
@@ -200,10 +200,10 @@ const CreateMovie = () => {
                   </MenuItem>
                 ))}
               </Select>
-              {errors.genre && (
+              {errors.genres && (
                 <Stack sx={{ width: "100%" }} spacing={2}>
                   <Alert variant="filled" severity="error">
-                    {errors.genre?.message}
+                    {errors.genres?.message}
                   </Alert>
                 </Stack>
               )}
