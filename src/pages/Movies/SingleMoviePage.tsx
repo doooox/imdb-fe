@@ -21,7 +21,6 @@ export default function FullWidthGrid() {
   const { id } = useParams();
 
   const { data: movie } = useGetMovieByIdQuery(id || "");
-  console.log(movie);
 
   return (
     <Container>
