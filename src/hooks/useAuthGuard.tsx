@@ -17,7 +17,10 @@ const useAuthGuard = () => {
       navigate(ROUTES.SINGIN);
       return;
     }
-    if (user && perms?.perms.guestOnly === true) {
+    if (user && perms?.perms.guestOnly) {
+      navigate(-1);
+    }
+    if (user && perms?.perms.adminOnly && !user.isAdmin) {
       navigate(-1);
     }
   });

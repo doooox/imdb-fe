@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { authService } from "../services/Auth/AuthService";
 import { IUser } from "../types/user.types";
 import { ROUTES } from "../utils/static";
 import {
@@ -16,7 +17,8 @@ const useUser = () => {
     setItemToStorage("user", JSON.stringify(user));
     navigate(ROUTES.MOVIES);
   };
-  const logout = () => {
+  const logout = async () => {
+    await authService.singout();
     clearItemFormStorage("user");
     setUser(null);
     navigate(ROUTES.SINGIN);
