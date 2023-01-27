@@ -35,7 +35,7 @@ const Navigation = () => {
     const routes = NAVIGATION_ROUTES.map((route) => {
       if (!user && route.perms.guestOnly) return route;
       if (user) {
-        if (route.perms.requiredAuth && !route.perms.adminOnly) return route;
+        if (route.perms.requiredAuth && user) return route;
         if (user.isAdmin && route.perms.adminOnly) return route;
       }
     }).filter((route) => route);

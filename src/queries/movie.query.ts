@@ -8,3 +8,7 @@ import { QUERY_KEYS } from "../utils/querykeys";
 export const useGetMoviesQuery = () => {
     return useQuery<IMovie[], AxiosError<IError>>([QUERY_KEYS.MOVIES], async () => await movieService.getAll())
 }
+
+export const useGetMovieByIdQuery = (id: string) => {
+    return useQuery<IMovie, AxiosError<IError>>([QUERY_KEYS.MOVIE], async () => await movieService.gatSingleMovie(id))
+}

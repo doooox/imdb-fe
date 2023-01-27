@@ -12,6 +12,14 @@ class MovieService {
     });
   };
 
+  gatSingleMovie = async (id: string) => {
+    return await this.httpService.request<IMovie>({
+      url: `/movies/${id}`,
+      method: "GET",
+    });
+  };
+
+
   createMovie = async (data: IMovieDraft) => {
     return await this.httpService.request<IMovieDraft>({
       url: ENDPOINTS.CREATEMOVIE,
