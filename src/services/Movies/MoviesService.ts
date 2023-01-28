@@ -1,13 +1,14 @@
 import { httpService } from "../HttpService";
 import { ENDPOINTS } from "../../utils/static";
 import { IMovie, IMovieDraft } from "../../types/movie.types";
+import { Pagination } from "../../types/pagination.types";
 
 class MovieService {
   private httpService = httpService;
 
-  getAll = async () => {
-    return await this.httpService.request<IMovie[]>({
-      url: ENDPOINTS.MOVIES,
+  getAll = async (page: number) => {
+    return await this.httpService.request<Pagination<IMovie[]>>({
+      url: `${ENDPOINTS.MOVIES}?page=${page}`,
       method: "GET",
     });
   };

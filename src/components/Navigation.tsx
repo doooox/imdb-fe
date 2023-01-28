@@ -108,14 +108,15 @@ const Navigation = () => {
                     page && (
                       <Button
                         key={page.name}
-                        sx={{ my: 2, color: "white", display: "block" }}
+                        sx={{
+                          my: 2,
+                          color: "black",
+                          display: "block",
+                        }}
+                        style={{ color: "black" }}
+                        href={page.path}
                       >
-                        <Link
-                          to={page.path}
-                          style={{ textDecoration: "none", color: "black" }}
-                        >
-                          {page.name}
-                        </Link>
+                        {page.name}
                       </Button>
                     )
                 )}
@@ -144,13 +145,12 @@ const Navigation = () => {
               {getAvailbleRoutes()?.map(
                 (page) =>
                   page && (
-                    <Button key={page.name} sx={{ my: 2, display: "block" }}>
-                      <Link
-                        to={page.path}
-                        style={{ textDecoration: "none", color: "white" }}
-                      >
-                        {page.name}
-                      </Link>
+                    <Button
+                      key={page.name}
+                      sx={{ my: 2, display: "block", color: "white" }}
+                      href={page.path}
+                    >
+                      {page.name}
                     </Button>
                   )
               )}

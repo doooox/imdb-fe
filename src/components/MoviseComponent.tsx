@@ -4,6 +4,7 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Chip,
   Grid,
   Typography,
 } from "@mui/material";
@@ -15,10 +16,10 @@ interface Props {
 
 const MoviseComponent = ({ movie }: Props) => {
   return (
-    <Grid item xs={2} sm={4} md={4} key={movie._id}>
-      <Card sx={{ maxWidth: 400 }}>
+    <Grid item xs={8} sm={3} md={3} key={movie._id}>
+      <Card sx={{ maxWidth: 400, height: 500 }}>
         <CardMedia
-          sx={{ height: 350 }}
+          sx={{ height: 300 }}
           image={movie.coverImage}
           title="Movie cover image"
         />
@@ -27,14 +28,10 @@ const MoviseComponent = ({ movie }: Props) => {
             {movie.title}
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
-            {movie.genres.map((gen) => (
-              <small
-                style={{ fontSize: "0.7rem", margin: "0.2rem" }}
-                key={gen._id}
-              >
-                {gen.name}
-              </small>
-            ))}
+            {movie.genres.map(
+              (genre, index) =>
+                index < 2 && <Chip key={genre?._id} label={genre?.name} />
+            )}
           </Typography>
           <Typography variant="caption" color="text.secondary">
             300 views • created 3w ago
