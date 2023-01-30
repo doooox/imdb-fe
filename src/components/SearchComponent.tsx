@@ -49,7 +49,6 @@ export default function SearchComponent() {
   return (
     <Autocomplete
       disablePortal
-      id="combo-box-demo"
       options={mapMoviesToAutocompleteOptions()}
       sx={{ width: 250 }}
       loading={isLoading}
