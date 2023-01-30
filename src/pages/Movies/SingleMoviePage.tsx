@@ -38,6 +38,7 @@ export default function FullWidthGrid() {
               image={movie?.coverImage}
               title="Movie cover image"
               style={{ objectFit: "contain" }}
+              component="img"
             />
           </Grid>
           <Grid xs={6} md={8}>

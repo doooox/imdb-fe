@@ -8,12 +8,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { NAVIGATION_ROUTES, ROUTES, SITE } from "../utils/static";
 import { useContext } from "react";
-import SearchIcon from "@mui/icons-material/Search";
 import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
-import { Search, SearchIconWrapper, StyledInputBase } from "./SearchComponent";
+import SearchComponent from "./SearchComponent";
 import { UserContext } from "../context/UserContext";
 
 const Navigation = () => {
@@ -155,15 +154,7 @@ const Navigation = () => {
                   )
               )}
             </Box>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
+            <SearchComponent />
           </Toolbar>
         </Container>
       </AppBar>

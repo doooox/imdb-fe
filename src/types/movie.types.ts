@@ -14,3 +14,8 @@ export interface IGenre {
     _id: string,
     name?: string
 }
+
+export interface ISerchMovies {
+    title: string,
+    _id: string
+}
