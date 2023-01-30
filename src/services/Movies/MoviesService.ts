@@ -1,6 +1,6 @@
 import { httpService } from "../HttpService";
 import { ENDPOINTS } from "../../utils/static";
-import { IMovie, IMovieDraft } from "../../types/movie.types";
+import { IMovie, IMovieDraft, ISerchMovies } from "../../types/movie.types";
 import { Pagination } from "../../types/pagination.types";
 
 class MovieService {
@@ -19,6 +19,13 @@ class MovieService {
       method: "GET",
     });
   };
+
+  getSearchedMovies = async (query: string) => {
+    return await this.httpService.request<ISerchMovies[]>({
+      url: `${ENDPOINTS.SEARCH}?search=${query}`,
+      method: "GET",
+    });
+  }
 
 
   createMovie = async (data: IMovieDraft) => {

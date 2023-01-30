@@ -75,6 +75,7 @@ export const ENDPOINTS = {
     SINGUP: "/auth/singup",
     SINGOUT: "/auth/singout",
     MOVIES: "/movies",
+    SEARCH: "/movies/find",
     GENRES: "/genres",
     CREATEMOVIE: "/movies/create",
 }
