@@ -1,17 +1,34 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { IMovie } from "../../types/movie.types";
-import { Typography } from "@mui/material";
+import {
+  InputLabel,
+  MenuItem,
+  OutlinedInput,
+  Select,
+  SelectChangeEvent,
+  Typography,
+} from "@mui/material";
 import useAuthGuard from "../../hooks/useAuthGuard";
 import { Container } from "@mui/system";
-import { useCallback, useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { LoadingContext } from "../../context/LoadingContext";
 import { useGetMoviesQuery } from "../../queries/movie.query";
 import useErrors from "../../hooks/useInfoMessages";
 import MoviseComponent from "../../components/MoviseComponent";
 import { useLocation } from "react-router-dom";
 import PaginationComponent from "../../components/PaginationComponen";
-
+import { useGetGenresQuery } from "../../queries/genres.query";
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 const Movies = () => {
   const location = useLocation();
   const getPage = useCallback(() => {
@@ -21,13 +38,22 @@ const Movies = () => {
   useAuthGuard();
   const { getFormatedMessages, setError } = useErrors();
   const { setLoading } = useContext(LoadingContext);
+  const [genresName, setGenresName] = useState<string[]>([]);
+  const { data: genres } = useGetGenresQuery();
+  const formatFilter = () => {
+    return genresName.map((genre) => {
+      return {
+        _id: genre,
+      };
+    });
+  };
 
   const {
     data: paginatedMovies,
     isLoading,
     error,
     refetch,
-  } = useGetMoviesQuery(getPage());
+  } = useGetMoviesQuery(formatFilter(), getPage());
 
   const movies = () => paginatedMovies?.data || [];
   const getCount = () => {
@@ -40,6 +66,20 @@ const Movies = () => {
     }
     return count;
   };
+
+  const handleChange = (event: SelectChangeEvent<typeof genresName>) => {
+    const {
+      target: { value },
+    } = event;
+    setGenresName(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [genresName]);
 
   useEffect(() => {
     if (error) {
@@ -75,6 +115,20 @@ const Movies = () => {
           MOVIE LIST
           {getFormatedMessages()}
         </Typography>
+        <InputLabel>Genres</InputLabel>
+        <Select
+          multiple
+          value={genresName}
+          onChange={handleChange}
+          input={<OutlinedInput label="Genres" />}
+          MenuProps={MenuProps}
+        >
+          {genres?.map((genre) => (
+            <MenuItem key={genre._id} value={genre._id}>
+              {genre.name}
+            </MenuItem>
+          ))}
+        </Select>
         <Box sx={{ flexGrow: 1 }}>
           <Grid
             container
