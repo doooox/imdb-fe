@@ -30,7 +30,7 @@ const MoviseComponent = ({ movie }: Props) => {
           <Typography gutterBottom variant="h5" component="div">
             {movie.genres.map(
               (genre, index) =>
-                index < 2 && <Chip key={genre?._id} label={genre?.name} />
+                index < 2 && <Chip key={index} label={genre?.name} />
             )}
           </Typography>
           <Typography variant="caption" color="text.secondary">

@@ -154,7 +154,7 @@ const Navigation = () => {
                   )
               )}
             </Box>
-            <SearchComponent />
+            {user && <SearchComponent />}
           </Toolbar>
         </Container>
       </AppBar>

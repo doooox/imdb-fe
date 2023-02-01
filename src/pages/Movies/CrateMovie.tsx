@@ -7,7 +7,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {
   Alert,
-  Chip,
   Container,
   InputLabel,
   MenuItem,
@@ -24,7 +23,7 @@ import { LoadingContext } from "../../context/LoadingContext";
 import useAuthGuard from "../../hooks/useAuthGuard";
 import { IError } from "../../types/error.types";
 import { AxiosError } from "axios";
-import { IGenre, IMovieDraft } from "../../types/movie.types";
+import { IMovieDraft } from "../../types/movie.types";
 import { movieService } from "../../services/Movies/MoviesService";
 import { useGetGenresQuery } from "../../queries/genres.query";
 import useInfoMessages from "../../hooks/useInfoMessages";
@@ -77,16 +76,19 @@ const CreateMovie = () => {
 
   const onSubmit: SubmitHandler<IMovieDraft> = (data) => {
     setLoading(true);
-    create({
+
+    const payload = {
       title: data.title,
       description: data.description,
       coverImage: data.coverImage,
-      genres: data.genres.map((genre) => {
+      genres: genresName.map((genre) => {
         return {
-          _id: genre._id,
+          _id: genre,
         };
       }),
-    });
+    };
+
+    create(payload);
   };
 
   const { setLoading } = useContext(LoadingContext);
@@ -185,17 +187,10 @@ const CreateMovie = () => {
                 value={genresName}
                 onChange={handleChange}
                 input={<OutlinedInput label="Genres" />}
-                renderValue={(selected) => (
-                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                    {selected.map((value) => (
-                      <Chip key={value} label={value} />
-                    ))}
-                  </Box>
-                )}
                 MenuProps={MenuProps}
               >
-                {genres?.map((genre: IGenre) => (
-                  <MenuItem key={genre._id} value={genre.name}>
+                {genres?.map((genre) => (
+                  <MenuItem key={genre._id} value={genre._id}>
                     {genre.name}
                   </MenuItem>
                 ))}

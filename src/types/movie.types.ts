@@ -19,3 +19,6 @@ export interface ISerchMovies {
     title: string,
     _id: string
 }
+export interface IMovieFilter {
+    _id: string
+}
