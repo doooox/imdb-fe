@@ -19,6 +19,7 @@ import MoviseComponent from "../../components/MoviseComponent";
 import { useLocation } from "react-router-dom";
 import PaginationComponent from "../../components/PaginationComponen";
 import { useGetGenresQuery } from "../../queries/genres.query";
+import { ROUTES } from "../../utils/static";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -150,7 +151,7 @@ const Movies = () => {
         style={{ minHeight: "10vh" }}
       >
         <Grid>
-          <PaginationComponent count={getCount()} />
+          <PaginationComponent route={ROUTES.MOVIES} count={getCount()} />
         </Grid>
       </Grid>
     </>

@@ -10,7 +10,6 @@ export const ROUTES = {
     CREATEMOVE: "/create"
 }
 
-
 export const NAVIGATION_ROUTES: IRoute[] = [
     {
         name: "Singin",
@@ -78,6 +77,8 @@ export const ENDPOINTS = {
     SEARCH: "/movies/find",
     GENRES: "/genres",
     CREATEMOVIE: "/movies/create",
+    COMMNETS: "/comments",
+    CREATECOMMENT: "/comments/create"
 }
 
 export type StorageKeys = "user"
