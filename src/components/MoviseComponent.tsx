@@ -34,7 +34,7 @@ const MoviseComponent = ({ movie }: Props) => {
             )}
           </Typography>
           <Typography variant="caption" color="text.secondary">
-            300 views • created 3w ago
+            {movie.views} views • created 3w ago
           </Typography>
         </CardContent>
         <CardActions>
@@ -44,7 +44,7 @@ const MoviseComponent = ({ movie }: Props) => {
             /movies/${movie._id}
           `}
           >
-            Learn More
+            View movie
           </Button>
         </CardActions>
       </Card>
