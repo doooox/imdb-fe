@@ -16,16 +16,19 @@ interface Props {
 
 const CommentsComponent = ({ comment }: Props) => {
   return (
-    <Item
-      style={{
-        textAlign: "initial",
-        margin: "1rem",
-        padding: "1rem",
-      }}
-      key={comment._id}
-    >
-      {comment.body}
-    </Item>
+    <>
+      <small>{comment.user.name}</small>
+      <Item
+        style={{
+          textAlign: "initial",
+          margin: "1rem",
+          padding: "1rem",
+        }}
+        key={comment._id}
+      >
+        {comment.body}
+      </Item>
+    </>
   );
 };
 

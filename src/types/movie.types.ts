@@ -5,11 +5,12 @@ export interface IMovieDraft {
     description: string,
     coverImage: string,
     genres: IGenre[]
-    comments?: IComment[]
+    comments?: IComment[],
 }
 
 export interface IMovie extends IMovieDraft {
     _id: string,
+    views: number
 }
 
 export interface IGenre {
