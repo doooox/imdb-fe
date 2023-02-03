@@ -6,6 +6,7 @@ export interface IMovieDraft {
     coverImage: string,
     genres: IGenre[]
     comments?: IComment[],
+    likeData?: ILikeData
 }
 
 export interface IMovie extends IMovieDraft {
@@ -25,3 +26,14 @@ export interface ISerchMovies {
 export interface IMovieFilter {
     _id: string
 }
+export interface ILikeData extends ILikeDataDraft {
+    _id: string,
+    totalLikes: number,
+    totalDislikes: number
+    movie: string
+}
+
+export interface ILikeDataDraft {
+    state: StateType
+}
+export type StateType = "like" | "dislike" | "none"

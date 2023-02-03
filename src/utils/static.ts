@@ -78,7 +78,8 @@ export const ENDPOINTS = {
     GENRES: "/genres",
     CREATEMOVIE: "/movies/create",
     COMMNETS: "/comments",
-    CREATECOMMENT: "/comments/create"
+    CREATECOMMENT: "/comments/create",
+    LIKES: "/movies/likes/"
 }
 
 export type StorageKeys = "user"

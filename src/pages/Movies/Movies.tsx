@@ -137,7 +137,11 @@ const Movies = () => {
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
             {movies().map((movie: IMovie) => (
-              <MoviseComponent movie={movie} key={movie._id} />
+              <MoviseComponent
+                movie={movie}
+                key={movie._id}
+                refetch={refetch}
+              />
             ))}
           </Grid>
         </Box>
