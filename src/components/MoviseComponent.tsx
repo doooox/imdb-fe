@@ -9,15 +9,17 @@ import {
   Typography,
 } from "@mui/material";
 import { IMovie } from "../types/movie.types";
+import LikeComponent from "./LikeComponent";
 
 interface Props {
   movie: IMovie;
+  refetch: () => void;
 }
 
-const MoviseComponent = ({ movie }: Props) => {
+const MoviseComponent = ({ movie, refetch }: Props) => {
   return (
     <Grid item xs={8} sm={3} md={3} key={movie._id}>
-      <Card sx={{ maxWidth: 400, height: 500 }}>
+      <Card sx={{ maxWidth: 400, height: 550 }}>
         <CardMedia
           sx={{ height: 300 }}
           image={movie.coverImage}
@@ -47,6 +49,7 @@ const MoviseComponent = ({ movie }: Props) => {
             View movie
           </Button>
         </CardActions>
+        <LikeComponent movie={movie} refetch={refetch} />
       </Card>
     </Grid>
   );
