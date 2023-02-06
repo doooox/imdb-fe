@@ -3,7 +3,6 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { useEffect, useState } from "react";
 import { useGetSearchedMovies } from "../queries/movie.query";
 import { CircularProgress } from "@mui/material";
-import useErrors from "../hooks/useInfoMessages";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../utils/static";
 
@@ -12,11 +11,9 @@ let debounce: number;
 export default function SearchComponent() {
   const navigation = useNavigate();
   const [term, setNewTerm] = useState<string>("");
-  const { getFormatedMessages, setError } = useErrors();
   const {
     data: searchedMovies,
     isLoading,
-    error,
     refetch,
   } = useGetSearchedMovies(term);
 
@@ -27,22 +24,16 @@ export default function SearchComponent() {
     }, 750);
   }, [term]);
 
-  useEffect(() => {
-    if (error) {
-      setError(error);
-    }
-  }, [error, setError]);
-
   const onInputSelect = (value: { label: string; id: string } | null) => {
     return navigation(`${ROUTES.MOVIES}/${value?.id}`);
   };
 
   const mapMoviesToAutocompleteOptions = () => {
     if (!searchedMovies) return [];
-    return searchedMovies.map((movie) => {
+    return searchedMovies.hits.map((movie) => {
       return {
-        label: movie.title,
-        id: movie._id,
+        label: movie.name,
+        id: movie.objectID,
       };
     });
   };
@@ -68,7 +59,6 @@ export default function SearchComponent() {
                   <CircularProgress color="inherit" size={20} />
                 ) : null}
                 {params.InputProps.endAdornment}
-                {getFormatedMessages()}
               </>
             ),
           }}
