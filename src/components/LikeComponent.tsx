@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { LoadingContext } from "../context/LoadingContext";
 import { AxiosError } from "axios";
 import { IError } from "../types/error.types";
+import { emmitEvent, getSocket } from "../services/SocketService";
 
 interface Props {
   movie: IMovie;
@@ -25,6 +26,7 @@ export default function LikeComponent({ movie, refetch }: Props) {
       onSuccess: () => {
         setLoading(false);
         refetch();
+        emmitEvent("movie-liked", "liek-room");
       },
       onError: (error: AxiosError<IError>) => {
         setLoading(false);
@@ -50,6 +52,11 @@ export default function LikeComponent({ movie, refetch }: Props) {
       state: newState,
     });
   };
+
+  getSocket().on("movie-liked", () => {
+    console.log("movie loked");
+    refetch();
+  });
 
   return (
     <Stack spacing={2} direction="row" sx={{ m: 2 }}>
