@@ -32,6 +32,7 @@ import { AxiosError } from "axios";
 import { IError } from "../../types/error.types";
 import { ROUTES } from "../../utils/static";
 import { QUERY_KEYS } from "../../utils/querykeys";
+import { emmitEvent, getSocket } from "../../services/SocketService";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -67,6 +68,7 @@ export default function SingleMoviePage() {
       setSuccess(["Comment created"]);
       reset();
       refetch();
+      emmitEvent("comment-added", "comment-room");
     },
     onError: (error: AxiosError<IError>) => {
       setLoading(false);
@@ -89,6 +91,10 @@ export default function SingleMoviePage() {
   useEffect(() => {
     refetch();
   }, [getPage]);
+
+  getSocket().on("comment-added", () => {
+    refetch();
+  });
 
   const comments = () => paginatedComments?.data || [];
   const getCount = () => {
