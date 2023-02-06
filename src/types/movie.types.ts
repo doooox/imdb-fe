@@ -19,10 +19,6 @@ export interface IGenre {
     name?: string
 }
 
-export interface ISerchMovies {
-    title: string,
-    _id: string
-}
 export interface IMovieFilter {
     _id: string
 }
@@ -37,3 +33,11 @@ export interface ILikeDataDraft {
     state: StateType
 }
 export type StateType = "like" | "dislike" | "none"
+
+export type AlgoliaHits = {
+    hits: AlgoliaHit[];
+};
+export type AlgoliaHit = {
+    objectID: string,
+    name: string
+};
